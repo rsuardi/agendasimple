@@ -53,8 +53,8 @@
       <file leaf-file-name="ContactRepository.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/practice/repository/ContactRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="633">
-              <caret line="69" column="64" lean-forward="true" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
+            <state relative-caret-position="463">
+              <caret line="59" column="13" lean-forward="true" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#213#214#0" expanded="true" />
@@ -315,7 +315,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526650966211</updated>
-      <workItem from="1526650969733" duration="8415000" />
+      <workItem from="1526650969733" duration="8467000" />
     </task>
     <task id="LOCAL-00001" summary="adding gitignore">
       <created>1526660594125</created>
@@ -345,11 +345,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526660649951</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="adding workspace.xml">
+      <created>1526660655212</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1526660655212</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8415000" />
+    <option name="totallyTimeSpent" value="8467000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
@@ -507,8 +514,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/practice/repository/ContactRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="633">
-          <caret line="69" column="64" lean-forward="true" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
+        <state relative-caret-position="463">
+          <caret line="59" column="13" lean-forward="true" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#213#214#0" expanded="true" />
