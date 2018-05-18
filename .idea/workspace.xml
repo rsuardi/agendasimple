@@ -315,7 +315,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526650966211</updated>
-      <workItem from="1526650969733" duration="8410000" />
+      <workItem from="1526650969733" duration="8415000" />
     </task>
     <task id="LOCAL-00001" summary="adding gitignore">
       <created>1526660594125</created>
@@ -338,11 +338,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526660643664</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="adding workspace.xml">
+      <created>1526660649951</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1526660649951</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8410000" />
+    <option name="totallyTimeSpent" value="8415000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
