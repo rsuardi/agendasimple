@@ -44,12 +44,15 @@ public class ContactRepository implements IContact {
     @Override
     public void printContacts() {
 
-        if(getList().size() == 0){
-           System.out.println("No hay contactos en la lista");
-        }else{
-            for (Contact contact : getList()) {
-                System.out.printf("Id: %d. Mi nombre es %s y mi número telefónico es %s%n", contact.getId(), contact.getName(), contact.getPhone());
+        try {
+            if (getList().size() == 0) {
+                System.out.println("No hay contactos en la lista");
+            } else {
+                for (Contact contact : getList()) {
+                    System.out.printf("Id: %d. Mi nombre es %s y mi número telefónico es %s%n", contact.getId(), contact.getName(), contact.getPhone());
+                }
             }
+        } catch (Exception ex) {
         }
     }
 

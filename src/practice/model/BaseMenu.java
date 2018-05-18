@@ -11,14 +11,20 @@ public class BaseMenu {
     private int menuInput;
     private String userInput;
     private boolean isMenuClosed;
+    private final String returnMessage;
 
 
     public BaseMenu() {
+        returnMessage = "PRESIONE ENTER PARA CONTINUAR...";
         menuScanner = new Scanner(System.in);
         userScanner = new Scanner(System.in);
         menuInput = 0;
         userInput = "";
         isMenuClosed = false;
+    }
+
+    public String getReturnMessage() {
+        return returnMessage;
     }
 
     public int getMenuInput() {

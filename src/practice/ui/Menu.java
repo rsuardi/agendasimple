@@ -5,6 +5,7 @@ import practice.model.BaseMenu;
 import practice.model.Contact;
 import practice.repository.ContactRepository;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu extends BaseMenu implements IMenu {
@@ -54,14 +55,21 @@ public class Menu extends BaseMenu implements IMenu {
                 exitMenu();
                 break;
             default:
-                System.out.println("Debe elegir una opcion de las 4 que aparecen en el menú.");
+                defaultAction();
                 break;
         }
         reInit();
     }
 
     public void printOutput() {
-        getContactRepository().printContacts();
+
+        try {
+            getContactRepository().printContacts();
+            System.out.println(getReturnMessage());
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void exitMenu() {
@@ -81,18 +89,27 @@ public class Menu extends BaseMenu implements IMenu {
 
     private void sendContact(){
 
-        System.out.println("Digite el nombre");
-        getContactRepository().getContact().setName(getContactName());
+        try {
+            System.out.println("Digite el nombre");
+            getContactRepository().getContact().setName(getContactName());
 
-        System.out.println("Digite el teléfono");
-        getContactRepository().getContact().setPhone(getContactPhone());
+            System.out.println("Digite el teléfono");
+            getContactRepository().getContact().setPhone(getContactPhone());
 
-        if (getContactRepository().getIsValidContact()) {
-            getContactRepository().createContact(getContactRepository().getContact());
-            System.out.println("Contacto creado con éxito!");
-        } else {
-            System.out.println("No se pudo crear el contacto");
+            if (getContactRepository().getIsValidContact()) {
+                getContactRepository().createContact(getContactRepository().getContact());
+                System.out.println("Contacto creado con éxito!");
+                System.out.println(getReturnMessage());
+                System.in.read();
+            } else {
+                System.out.println("No se pudo crear el contacto");
+                System.out.println(getReturnMessage());
+                System.in.read();
+            }
+        } catch (IOException ex) {
+
         }
+
     }
 
     private String getContactPhone() {
@@ -125,12 +142,38 @@ public class Menu extends BaseMenu implements IMenu {
     }
 
     private void deleteContact() {
-        if (getContactRepository().getList().size() == 0) {
-            System.out.println("No hay contactos en la lista");
-        } else {
-            printOutput();
-            getContactRepository().deleteContact(getContactId());
+        try {
+            if (getContactRepository().getList().size() == 0) {
+                System.out.println("No hay contactos en la lista");
+                System.out.println(getReturnMessage());
+                System.in.read();
+            } else {
+                printOutput();
+                getContactRepository().deleteContact(getContactId());
+                System.out.println(getReturnMessage());
+                System.in.read();
+            }
+        } catch (IOException ex) {
         }
     }
 
+    private void defaultAction() {
+        try {
+            System.out.println("Debe elegir una opcion de las 4 que aparecen en el menú.");
+            System.out.println(getReturnMessage());
+            System.in.read();
+        } catch (IOException ex) {
+        }
+    }
+
+    private void cls() {
+        //Clears Screen in java
+        try {
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime().exec("clear");
+        } catch (Exception ex) {
+        }
+    }
 }
