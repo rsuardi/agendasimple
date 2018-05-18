@@ -7,16 +7,6 @@ import java.util.ArrayList;
 
 public class ContactRepository implements IContact{
 
-    public Contact getContact() {
-        return contact;
-    }
-
-    public void setContact(Contact contact) {
-        this.contact = contact;
-    }
-
-    private Contact contact;
-
     public ArrayList<Contact> getList() {
         return list;
     }
@@ -38,8 +28,7 @@ public class ContactRepository implements IContact{
            System.out.println("No hay contactos en la lista");
         }else{
             for (Contact contact : getList()) {
-                //System.out.printf("ENVIANDO %d PAPELETAS DE %d = %d%n", list.get(key), key, (list.get(key) * key));
-                System.out.printf("Id: %d. Mi nombre es %s y mi número telefonico es %s%n", contact.getId(), contact.getName(), contact.getPhone());
+                System.out.printf("Id: %d. Mi nombre es %s y mi número telefónico es %s%n", contact.getId(), contact.getName(), contact.getPhone());
             }
         }
     }
