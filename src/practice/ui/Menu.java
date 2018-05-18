@@ -1,29 +1,31 @@
 package practice.ui;
 
+import practice.interfaces.IMenu;
+import practice.model.BaseMenu;
 import practice.model.Contact;
 import practice.repository.ContactRepository;
-import practice.util.Util;
 
 import java.util.Scanner;
 
+public class Menu extends BaseMenu implements IMenu {
 
-public class Menu {
-
-    private Scanner menuScanner = new Scanner(System.in);
-    private Scanner userScanner = new Scanner(System.in);
-    private int menuInput = 0;
-    private String userInput = "";
-    private boolean isMenuClosed = false;
     private ContactRepository contactRepository;
-    private Contact contact;
-    private boolean isValidContact = false;
 
     public Menu() {
-        contactRepository = new ContactRepository();
-        contact = new Contact();
+        super();
+        if (contactRepository == null)
+            contactRepository = new ContactRepository();
     }
 
-    public  void showMenu(){
+    public ContactRepository getContactRepository() {
+        return contactRepository;
+    }
+
+    public void setContactRepository(ContactRepository contactRepository) {
+        this.contactRepository = contactRepository;
+    }
+
+    public void showMenu() {
 
         System.out.println("Bienvenido a tu agenda simple");
         System.out.println("--Seleccione una opción del menú");
@@ -34,79 +36,19 @@ public class Menu {
         System.out.println("\033[3mDigite una opcion para continuar...\033[3m");
     }
 
-    private int getMenuInput() {
-        return menuInput;
-    }
-
-    public void setMenuInput() {
-
-        String menuEntry = menuScanner.next();
-
-        if(Util.isNumber(menuEntry)){
-            menuInput = Integer.parseInt(menuEntry);
-        }
-        else {
-            menuInput = 0;
-        }
-    }
-
-    public void showMenuInput(){
-
-        System.out.println(getMenuInput());
-    }
-
-    private String getUserInput() {
-
-        return userInput;
-    }
-
-    private void setUserInput() {
-
-        String userEntry = userScanner.next();
-        userInput = userEntry;
-    }
-
-    public void showUserInput(){
-        System.out.println(getUserInput());
-    }
-
-    public boolean getIsMenuClosed(){
-        return isMenuClosed;
-    }
-
-    private void setIsMenuClosed(boolean value) {
-        isMenuClosed = value;
-    }
-
-    private void exitMenu() {
-        setIsMenuClosed(true);
-        System.out.println("Vuelva pronto!");
-        System.exit(0);
-    }
-
     public void doSomething(){
 
         int input = getMenuInput();
 
         switch (input){
             case 1:
-                contactRepository.showContacts();
+                printOutput();
                 break;
             case 2:
                 sendContact();
-                if(isValidContact){
-                    contactRepository.createContact(contact);
-                    System.out.println("Contacto creado con éxito!");
-                }else{
-                    System.out.println("No se pudo crear el contacto");
-                }
                 break;
             case 3:
-                if(contactRepository.getList().size() == 0){
-                    System.out.println("No hay contactos en la lista");
-                }else{
-                    contactRepository.deleteContact(getContactId());
-                }
+                deleteContact();
                 break;
             case 4:
                 exitMenu();
@@ -118,60 +60,77 @@ public class Menu {
         reInit();
     }
 
-    private void printContacts() {
-        contactRepository.showContacts();
+    public void printOutput() {
+        getContactRepository().printContacts();
+    }
+
+    private void exitMenu() {
+
+        setIsMenuClosed(true);
+        System.out.println("Vuelva pronto!");
+        System.exit(0);
     }
 
     private void reInit(){
-        contact = new Contact();
-        isValidContact = false;
-        menuScanner = new Scanner(System.in);
-        userScanner = new Scanner(System.in);
-        /*
-        isOpen = true;
-        resultado = 0;
-        list.clear();
-        */
+
+        getContactRepository().setContact(new Contact());
+        getContactRepository().setIsValidContact(false);
+        setMenuScanner(new Scanner(System.in));
+        setUserScanner(new Scanner(System.in));
     }
 
     private void sendContact(){
 
-        /*
-        System.out.println("Digite el id");
-        contact.setId(getContactId());
-        */
-
         System.out.println("Digite el nombre");
-        contact.setName(getContactName());
+        getContactRepository().getContact().setName(getContactName());
 
         System.out.println("Digite el teléfono");
-        contact.setPhone(getContactPhone());
+        getContactRepository().getContact().setPhone(getContactPhone());
+
+        if (getContactRepository().getIsValidContact()) {
+            getContactRepository().createContact(getContactRepository().getContact());
+            System.out.println("Contacto creado con éxito!");
+        } else {
+            System.out.println("No se pudo crear el contacto");
+        }
     }
 
     private String getContactPhone() {
-        String phone = userScanner.next();
-        isValidContact = true;
+
+        String phone = getUserScanner().next();
+        getContactRepository().setIsValidContact(true);
         return phone;
     }
 
     private String getContactName() {
-        String name = userScanner.next();
-        isValidContact = true;
+
+        String name = getUserScanner().next();
+        getContactRepository().setIsValidContact(true);
         return name;
     }
 
-    public int getContactId(){
+    private int getContactId() {
 
         System.out.println("Introduzca el id");
-        int id = 0;
+        int id;
         try{
-            id = userScanner.nextInt();
-            isValidContact = true;
+            id = getUserScanner().nextInt();
+            getContactRepository().setIsValidContact(true);
+            return id;
         }catch(Exception ex){
-            isValidContact = false;
+            getContactRepository().setIsValidContact(false);
             System.out.println("El id debe ser un número");
             return 0;
         }
-        return id;
     }
+
+    private void deleteContact() {
+        if (getContactRepository().getList().size() == 0) {
+            System.out.println("No hay contactos en la lista");
+        } else {
+            printOutput();
+            getContactRepository().deleteContact(getContactId());
+        }
+    }
+
 }

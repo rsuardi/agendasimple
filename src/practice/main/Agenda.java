@@ -1,12 +1,14 @@
 package practice.main;
 
+import practice.interfaces.IMenu;
 import practice.ui.Menu;
 
 public class Agenda {
 
     public static void main(String[] args) {
 
-        Menu menu = new Menu();
+        IMenu menu = new Menu();
+
         while (!menu.getIsMenuClosed()){
             menu.showMenu();
             menu.setMenuInput();

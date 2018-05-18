@@ -5,7 +5,17 @@ import practice.model.Contact;
 
 import java.util.ArrayList;
 
-public class ContactRepository implements IContact{
+public class ContactRepository implements IContact {
+
+    private ArrayList<Contact> list;
+    private Contact contact;
+    private boolean isValidContact;
+
+    public ContactRepository() {
+        list = new ArrayList<>();
+        contact = new Contact();
+        isValidContact = false;
+    }
 
     public ArrayList<Contact> getList() {
         return list;
@@ -15,14 +25,24 @@ public class ContactRepository implements IContact{
         this.list = list;
     }
 
-    private ArrayList<Contact> list = new ArrayList<>();
+    public Contact getContact() {
+        return contact;
+    }
 
-     public ContactRepository(){
-         list = new ArrayList<>();
-     }
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public boolean getIsValidContact() {
+        return isValidContact;
+    }
+
+    public void setIsValidContact(boolean validContact) {
+        isValidContact = validContact;
+    }
 
     @Override
-    public void showContacts() {
+    public void printContacts() {
 
         if(getList().size() == 0){
            System.out.println("No hay contactos en la lista");
@@ -36,7 +56,7 @@ public class ContactRepository implements IContact{
     @Override
     public void createContact(Contact contact) {
 
-         int id = 0;
+        int id;
 
          if(list == null) list = new ArrayList<>();
          if(list.size() == 0) id = 1;
@@ -49,14 +69,16 @@ public class ContactRepository implements IContact{
     @Override
     public void deleteContact(int id) {
 
-         try{
-             if(getList().size() == 0){
-                 System.out.println("No hay contactos en la lista");
-             }else{
-                 list.remove(id - 1);
-             }
-         }catch (Exception ex){
+        try {
+            if (getList().size() == 0) {
+                System.out.println("No hay contactos en la lista");
+            } else {
+                String name = list.get(id - 1).getName();
+                list.remove(id - 1);
+                System.out.printf("El contacto %s ha sido borrado!%n", name);
+            }
+        } catch (Exception ex) {
             System.out.println("Este id no existe en la lista");
-         }
+        }
     }
 }
